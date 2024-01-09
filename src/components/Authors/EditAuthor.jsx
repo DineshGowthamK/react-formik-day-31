@@ -8,6 +8,8 @@ import ApiService from '../../utils/ApiService';
 import { useNavigate,useParams } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup'
+import { toast } from 'react-toastify';
+
 
 function EditAuthor() {
 
@@ -41,6 +43,7 @@ function EditAuthor() {
         let res = await ApiService.put(`/formik/${id}`,values)
         if(res.status === 200){
           navigate('/dashboard-author')
+          toast.success("Author Data Edited")
         }
       } catch (error) {
         alert("Failed to Edit a Author")
@@ -53,7 +56,6 @@ function EditAuthor() {
     try {
       let res = await ApiService.get(`/formik/${id}`)
       if(res.status===200){
-        console.log(res.data);
         setValues({ 
           name:res.data.name,
           bio:res.data.bio,
@@ -61,7 +63,7 @@ function EditAuthor() {
         })
       }    
     }catch (error) {
-      alert("Internal error")
+      toast.error("Internal error")
     }
   }
 

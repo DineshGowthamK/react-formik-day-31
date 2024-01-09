@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import Topbar from '../common/Topbar';
 import { useNavigate } from 'react-router-dom';
 import ApiService from '../../utils/ApiService';
 import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
 import { Table } from 'react-bootstrap';
+import { toast } from 'react-toastify';
 
 function DashboardBook() {
   const [bookData, setBookData] = useState([]);
@@ -21,10 +19,11 @@ function DashboardBook() {
     try {
       let res = await ApiService.get('/formik');
       if (res.status === 200) {
+        toast.success("Books fetched successfully")
         setBookData(res.data);
       }
     } catch (error) {
-      alert('Data fetch failed');
+      toast.error('Data fetch failed');
     }
   };
 
@@ -33,9 +32,10 @@ function DashboardBook() {
       let res = await ApiService.delete(`/formik/${id}`);
       if (res.status === 200) {
         getBookData();
+        toast.success("Book Data deleted")
       }
     } catch (error) {
-      alert('Data removal failed');
+      toast.error('Data removal failed');
     }
   };
 

@@ -8,6 +8,7 @@ import ApiService from '../../utils/ApiService';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup'
+import { toast } from 'react-toastify';
 
 function AddAuthor() {
   const navigate = useNavigate()
@@ -33,9 +34,10 @@ function AddAuthor() {
         let res = await ApiService.post('/formik',values)
         if(res.status === 201){
           navigate('/dashboard-author')
+          toast.success("Author added Successfully")
         }
       } catch (error) {
-        alert("Failed to create a Author")
+        toast.error("Failed to create a Author")
       }
     }
   })

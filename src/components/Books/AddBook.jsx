@@ -8,6 +8,7 @@ import ApiService from '../../utils/ApiService';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup'
+import { toast } from 'react-toastify';
 
 function AddBook() {
   const navigate = useNavigate()
@@ -40,9 +41,10 @@ function AddBook() {
         let res = await ApiService.post('/formik',values)
         if(res.status === 201){
           navigate('/')
+          toast.success("Book Added Successfully")
         }
       } catch (error) {
-        alert("Failed to create a book")
+        toast.error("Failed to create a book")
       }
     }
   })

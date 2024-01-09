@@ -8,6 +8,7 @@ import ApiService from '../../utils/ApiService';
 import { useNavigate,useParams } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup'
+import {toast} from 'react-toastify'
 
 function EditBook() {
 
@@ -47,9 +48,10 @@ function EditBook() {
         let res = await ApiService.put(`/formik/${id}`,values)
         if(res.status === 200){
           navigate('/')
+          toast.success("Books fetched successfully")
         }
       } catch (error) {
-        alert("Failed to Edit a book")
+        toast.error("Failed to Edit a book")
       }
     }
   })
@@ -69,7 +71,7 @@ function EditBook() {
         })
       }    
     }catch (error) {
-      alert("Internal error")
+      toast.error("Internal error")
     }
   }
 

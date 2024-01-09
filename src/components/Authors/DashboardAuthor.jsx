@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import ApiService from '../../utils/ApiService';
 import Button from 'react-bootstrap/Button';
 import { Table } from 'react-bootstrap';
+import { toast } from 'react-toastify';
 
 function DashboardAuthor() {
 
@@ -22,9 +23,10 @@ function DashboardAuthor() {
       // console.log(res);
       if(res.status === 200){
         setAuthorData(res.data)
+        toast.success("Author's Data Fetched successfully")
       }
     } catch (error) {
-      alert("data fetch failed")
+      toast.error("Author's data fetch failed")
     }
   }
 
@@ -34,9 +36,10 @@ function DashboardAuthor() {
       // console.log(res);
       if(res.status === 200){
         getAuthorData();
+        toast.success("Author Deleted successfully")
       }
     } catch (error) {
-      alert("data removal failed")
+      toast.error("data removal failed")
     }
   }
 
