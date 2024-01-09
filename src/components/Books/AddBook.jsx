@@ -27,10 +27,10 @@ function AddBook() {
       author : Yup.string().max(20,'Author cannot exceed 20 characters')
                            .min(3,"Author cannot be shorter than 3 characters")
                            .required("Author cannot be empty"),
-      isbnNum : Yup.string().matches(/^\d{13}$/,' Enter a valid 13 digit ISBN Number')
+      isbnNum : Yup.string().matches(/^\d{17}$/,' Enter a valid 17 digit ISBN Number')
                             .required("ISBN Number cannot be empty"),
       description : Yup.string().max(200,'Description cannot exceed 200 characters')
-                                .min(5,"Description cannot be shorter than 5 characters")
+                                .min(50,"Description cannot be shorter than 50 characters")
                                 .required("Description cannot be empty"),
       date : Yup.string().required("Date cannot be empty")
     }) ,

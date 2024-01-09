@@ -15,8 +15,8 @@ function EditAuthor() {
   const navigate = useNavigate()
   const [initialValues, setValues] = useState({ 
     name:'',
-    date:'',
-    bio:''
+    bio:'',
+    dob:''
   })
 
   let formik = useFormik({
@@ -28,7 +28,8 @@ function EditAuthor() {
       bio : Yup.string().max(250,'Bio cannot exceed 250 characters')
                                 .min(50,"Bio cannot be shorter than 50 characters")
                                 .required("Bio cannot be empty"),
-      date : Yup.string().required("Date cannot be empty")
+      dob : Yup.string().required("Date cannot be empty").max(new Date(), 'Date of birth cannot be in the future')
+
     }) ,
     enableReinitialize: true,
     onSubmit : async(values) => {
@@ -55,8 +56,8 @@ function EditAuthor() {
         console.log(res.data);
         setValues({ 
           name:res.data.name,
-          date:res.data.date,
-          bio:res.data.bio
+          bio:res.data.bio,
+          dob:res.data.dob
         })
       }    
     }catch (error) {
@@ -90,7 +91,7 @@ function EditAuthor() {
           <Col md={6}>
             <Form.Group className="mb-3">
               <Form.Label>Date of Birth</Form.Label>
-              <Form.Control type='date' id="date" name="date" onChange={formik.handleChange} value={formik.values.date} onBlur={formik.handleBlur} placeholder="Enter published date"/>
+              <Form.Control type='date' id="date" name="dob" onChange={formik.handleChange} value={formik.values.dob} onBlur={formik.handleBlur} placeholder="Enter Date Of Birth"/>
               {formik.touched.date && formik.errors.date ? (<div style={{color: 'red'}}>{formik.errors.date}</div>) : null}
             </Form.Group>
           </Col>

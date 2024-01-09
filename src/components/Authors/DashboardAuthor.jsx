@@ -43,8 +43,8 @@ function DashboardAuthor() {
   return <>
     <Topbar/>
     <Container>
-    <Container className="d-flex justify-content-center align-items-center flex-column" >
-      <Button className='mt-3' variant='success' onClick={()=>navigate(`/add-author`)}>Add Author</Button>
+    <Container className="d-flex justify-content-start" >
+      <Button className='mt-3' variant='primary' onClick={()=>navigate(`/add-author`)}>Add Author</Button>
     </Container>
       <Row className='d-flex justify-content-start flex-row'>
       <div className='mt-3'>
@@ -65,8 +65,8 @@ function DashboardAuthor() {
                         <tr key={i}>
                           <td>{i+1}</td>
                           <td>{e.name}</td>
-                          <td>{e.date}</td>
-                          <td>{e.bio}</td>
+                          <td>{e.dob}</td>
+                          <td><div style={{width:"300px", overflow:"hidden", whiteSpace:"nowrap",textOverflow:"ellipsis"}}>{e.bio}</div></td>
                           <td>
                             <Button variant='primary' onClick={()=>navigate(`/edit-author/${e.id}`)}>Edit</Button>
                             &nbsp;
